@@ -1,9 +1,9 @@
 //
 //  Note.swift
-//  Rudrik_c0757521_Note_p1
+//  NoteApp
 //
-//  Created by MacStudent on 2019-11-07.
-//  Copyright © 2019 MacStudent. All rights reserved.
+//  Created by Rudrik Panchal on 2020-01-23.
+//  Copyright © 2020 Back benchers. All rights reserved.
 //
 
 import Foundation

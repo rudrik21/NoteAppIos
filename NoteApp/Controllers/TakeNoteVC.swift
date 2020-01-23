@@ -3,7 +3,7 @@
 //  NoteApp
 //
 //  Created by Rudrik Panchal on 2020-01-23.
-//  Copyright © 2019 MacStudent. All rights reserved.
+//  Copyright © 2020 Back benchers. All rights reserved.
 //
 
 import UIKit
