@@ -14,6 +14,15 @@
 		83CB135E23D8E83D00117A88 /* NoteApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 83CB135C23D8E83D00117A88 /* NoteApp.xcdatamodeld */; };
 		83CB136023D8E83E00117A88 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83CB135F23D8E83E00117A88 /* Assets.xcassets */; };
 		83CB136323D8E83E00117A88 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83CB136123D8E83E00117A88 /* LaunchScreen.storyboard */; };
+		83CB137623D8E9EA00117A88 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB136B23D8E9EA00117A88 /* NoteCell.swift */; };
+		83CB137723D8E9EA00117A88 /* FolderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB136C23D8E9EA00117A88 /* FolderCell.swift */; };
+		83CB137C23D8E9EA00117A88 /* utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB137223D8E9EA00117A88 /* utils.swift */; };
+		83CB137D23D8E9EA00117A88 /* Folder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB137423D8E9EA00117A88 /* Folder.swift */; };
+		83CB137E23D8E9EA00117A88 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB137523D8E9EA00117A88 /* Note.swift */; };
+		83CB138023D9F9A300117A88 /* NotesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB137F23D9F9A300117A88 /* NotesVC.swift */; };
+		83CB138223D9FCC100117A88 /* FoldersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB138123D9FCC100117A88 /* FoldersVC.swift */; };
+		83CB138423D9FF5F00117A88 /* TakeNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB138323D9FF5F00117A88 /* TakeNoteVC.swift */; };
+		83CB138823DA015800117A88 /* ListFoldersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB138723DA015800117A88 /* ListFoldersVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +35,15 @@
 		83CB135F23D8E83E00117A88 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		83CB136223D8E83E00117A88 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		83CB136423D8E83E00117A88 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		83CB136B23D8E9EA00117A88 /* NoteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
+		83CB136C23D8E9EA00117A88 /* FolderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FolderCell.swift; sourceTree = "<group>"; };
+		83CB137223D8E9EA00117A88 /* utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = utils.swift; sourceTree = "<group>"; };
+		83CB137423D8E9EA00117A88 /* Folder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Folder.swift; sourceTree = "<group>"; };
+		83CB137523D8E9EA00117A88 /* Note.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
+		83CB137F23D9F9A300117A88 /* NotesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotesVC.swift; sourceTree = "<group>"; };
+		83CB138123D9FCC100117A88 /* FoldersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersVC.swift; sourceTree = "<group>"; };
+		83CB138323D9FF5F00117A88 /* TakeNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeNoteVC.swift; sourceTree = "<group>"; };
+		83CB138723DA015800117A88 /* ListFoldersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFoldersVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +76,10 @@
 		83CB135223D8E83D00117A88 /* NoteApp */ = {
 			isa = PBXGroup;
 			children = (
+				83CB136A23D8E9EA00117A88 /* Cells */,
+				83CB136D23D8E9EA00117A88 /* Controllers */,
+				83CB137323D8E9EA00117A88 /* Models */,
+				83CB137223D8E9EA00117A88 /* utils.swift */,
 				83CB135323D8E83D00117A88 /* AppDelegate.swift */,
 				83CB135523D8E83D00117A88 /* SceneDelegate.swift */,
 				83CB135723D8E83D00117A88 /* ViewController.swift */,
@@ -68,6 +90,35 @@
 				83CB135C23D8E83D00117A88 /* NoteApp.xcdatamodeld */,
 			);
 			path = NoteApp;
+			sourceTree = "<group>";
+		};
+		83CB136A23D8E9EA00117A88 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				83CB136B23D8E9EA00117A88 /* NoteCell.swift */,
+				83CB136C23D8E9EA00117A88 /* FolderCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		83CB136D23D8E9EA00117A88 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				83CB137F23D9F9A300117A88 /* NotesVC.swift */,
+				83CB138123D9FCC100117A88 /* FoldersVC.swift */,
+				83CB138323D9FF5F00117A88 /* TakeNoteVC.swift */,
+				83CB138723DA015800117A88 /* ListFoldersVC.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		83CB137323D8E9EA00117A88 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				83CB137423D8E9EA00117A88 /* Folder.swift */,
+				83CB137523D8E9EA00117A88 /* Note.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -141,10 +192,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83CB137C23D8E9EA00117A88 /* utils.swift in Sources */,
+				83CB138023D9F9A300117A88 /* NotesVC.swift in Sources */,
+				83CB138223D9FCC100117A88 /* FoldersVC.swift in Sources */,
 				83CB135823D8E83D00117A88 /* ViewController.swift in Sources */,
 				83CB135423D8E83D00117A88 /* AppDelegate.swift in Sources */,
+				83CB138423D9FF5F00117A88 /* TakeNoteVC.swift in Sources */,
+				83CB137E23D8E9EA00117A88 /* Note.swift in Sources */,
+				83CB137623D8E9EA00117A88 /* NoteCell.swift in Sources */,
 				83CB135623D8E83D00117A88 /* SceneDelegate.swift in Sources */,
 				83CB135E23D8E83D00117A88 /* NoteApp.xcdatamodeld in Sources */,
+				83CB138823DA015800117A88 /* ListFoldersVC.swift in Sources */,
+				83CB137723D8E9EA00117A88 /* FolderCell.swift in Sources */,
+				83CB137D23D8E9EA00117A88 /* Folder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
