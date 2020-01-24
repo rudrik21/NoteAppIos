@@ -16,9 +16,11 @@ struct Folder : CustomStringConvertible {
     static var folders : [Folder] = []
     
     var description: String{
-        return folderName
+        return "\(folderName)"
     }
-    
+}
+
+extension Folder{
     mutating func addNote(note : Note) {
         notes.append(note)
         updateCurrent()
@@ -50,11 +52,7 @@ struct Folder : CustomStringConvertible {
         }
         updateCurrent()
     }
-    
-}
 
-
-extension Folder{
     func updateCurrent() {
         Folder.folders[self.index] = self
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8347436A23DA5A0D00506372 /* FolderData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8347436923DA5A0D00506372 /* FolderData.swift */; };
 		83CB135423D8E83D00117A88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB135323D8E83D00117A88 /* AppDelegate.swift */; };
 		83CB135623D8E83D00117A88 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB135523D8E83D00117A88 /* SceneDelegate.swift */; };
 		83CB135B23D8E83D00117A88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83CB135923D8E83D00117A88 /* Main.storyboard */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8347436923DA5A0D00506372 /* FolderData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderData.swift; sourceTree = "<group>"; };
 		83CB135023D8E83D00117A88 /* NoteApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83CB135323D8E83D00117A88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83CB135523D8E83D00117A88 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 			children = (
 				83CB137423D8E9EA00117A88 /* Folder.swift */,
 				83CB137523D8E9EA00117A88 /* Note.swift */,
+				8347436923DA5A0D00506372 /* FolderData.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8347436A23DA5A0D00506372 /* FolderData.swift in Sources */,
 				83CB137C23D8E9EA00117A88 /* utils.swift in Sources */,
 				83CB138023D9F9A300117A88 /* NotesVC.swift in Sources */,
 				83CB138223D9FCC100117A88 /* FoldersVC.swift in Sources */,
@@ -345,6 +349,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UGB22TWN23;
 				INFOPLIST_FILE = NoteApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -362,6 +367,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = UGB22TWN23;
 				INFOPLIST_FILE = NoteApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

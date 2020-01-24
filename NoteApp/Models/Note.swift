@@ -8,10 +8,11 @@
 
 import Foundation
 
-struct Note : CustomStringConvertible {
+struct Note : Codable, CustomStringConvertible {
     var noteName : String
     var index : Int?
     var description: String{
         return noteName
     }
+    
 }

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="true" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="15702" systemVersion="19C57" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="YES" userDefinedModelVersionIdentifier="">
+    <entity name="FolderData" representedClassName="FolderData" syncable="YES">
+        <attribute name="folderIndex" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="folderName" optional="YES" attributeType="String"/>
+        <attribute name="strNotes" optional="YES" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="FolderData" positionX="-54" positionY="-9" width="128" height="88"/>
+    </elements>
 </model>
