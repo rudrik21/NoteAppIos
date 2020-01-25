@@ -11,6 +11,8 @@ import Foundation
 struct Note : Codable, CustomStringConvertible {
     var noteName : String
     var index : Int?
+    var images: [String] = []
+    var audios: [String] = []
     var description: String{
         return noteName
     }
