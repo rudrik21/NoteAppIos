@@ -311,13 +311,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Sd-3k-LAW">
-                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Sd-3k-LAW">
+                                <rect key="frame" x="0.0" y="44" width="375" height="574"/>
                                 <color key="backgroundColor" red="0.12771538599999999" green="0.16868775550000001" blue="0.21907907269999999" alpha="0.92542363559999996" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="textColor" red="0.59897691009999998" green="0.73760157820000005" blue="0.91767090559999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdM-X4-Hm6">
+                                <rect key="frame" x="39" y="626" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.12771538599999999" green="0.16868775550000001" blue="0.21907907269999999" alpha="0.92542363559999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -336,7 +341,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="728-ST-jwB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1471.0144927536232" y="76.630434782608702"/>
+            <point key="canvasLocation" x="1469.5999999999999" y="76.011994002998506"/>
         </scene>
     </scenes>
     <resources>
