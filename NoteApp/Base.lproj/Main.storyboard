@@ -110,6 +110,9 @@
                     <navigationItem key="navigationItem" title="Folders" id="R64-os-i8Z">
                         <barButtonItem key="rightBarButtonItem" title="Edit" id="t29-yh-Q9C">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <action selector="onEditTV:" destination="fV0-Yy-8t0" id="obT-Se-PMg"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>

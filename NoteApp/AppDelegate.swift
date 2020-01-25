@@ -13,13 +13,69 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        fetchData()
         // Override point for customization after application launch.
-//        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (notification) in
-//        }
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { (notification) in
+                self.inBackground()
+            }
         
         return true
     }
 
+    @objc func inBackground() {
+        print("~~ clearing data..")
+        clearData()
+        
+        print("~~ saving data...")
+        let delegate = (UIApplication.shared.delegate as! AppDelegate)
+        let context = delegate.persistentContainer.viewContext
+        
+        if !Folder.folders.isEmpty{
+            Folder.folders.forEach { (folder) in
+                let f : FolderData = NSEntityDescription.insertNewObject(forEntityName: "FolderData", into: context) as! FolderData
+                    f.folder = folder
+                do{
+                    try context.save()
+                }catch{}
+            }
+        }
+    }
+    
+    func fetchData() {
+        let context = self.persistentContainer.viewContext
+            let req = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderData")
+//            req.predicate = NSPredicate(format: "name contains %@", "R")
+//            req.returnsObjectsAsFaults = false
+            
+            do {
+                let res = try context.fetch(req)
+                if !res.isEmpty{
+
+                    (res as! [FolderData]).forEach({ f in
+                        Folder.folders.append(f.folder)
+//                        let name = f.folderName
+//                        print(name)
+                    })
+                }
+            } catch {
+                print(error)
+            }
+    }
+    
+    func clearData() {
+        let context = self.persistentContainer.viewContext
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderData")
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
+        }
+    }
+    
     // MARK: UISceneSession Lifecycle
 
     func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {

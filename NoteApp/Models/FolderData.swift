@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc
+@objc(FolderData)
 public class FolderData: NSManagedObject{
     @NSManaged var folderName: String
     @NSManaged var folderIndex: Int32

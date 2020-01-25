@@ -28,54 +28,8 @@ class FoldersVC: UIViewController {
             tvFolders.rowHeight = 50
             initFolderCell()
             
-            NotificationCenter.default.addObserver(self, selector: #selector(inBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
+//            NotificationCenter.default.addObserver(self, selector: #selector(inBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
             
-            fetchData()
-        }
-        
-    @objc func inBackground() {
-        print("~~ saving data...")
-        let delegate = (UIApplication.shared.delegate as! AppDelegate)
-        let context = delegate.persistentContainer.viewContext
-        
-//        let folder = Folder.folders.first
-//            let f : FolderData = NSEntityDescription.insertNewObject(forEntityName: "FolderData", into: context) as! FolderData
-//        f.folder = folder!
-//
-        let f = NSEntityDescription.insertNewObject(forEntityName: "FolderData", into: context)
-        f.setValue("abc", forKey: "folderName")
-        f.setValue(0, forKey: "folderIndex")
-        f.setValue("[]", forKey: "strNotes")
-        
-        do{
-            try context.save()
-        }catch{}
-    }
-    
-    func fetchData() {
-            let delegate = (UIApplication.shared.delegate as! AppDelegate)
-            let context = delegate.persistentContainer.viewContext
-            let req = NSFetchRequest<NSFetchRequestResult>(entityName: "FolderData")
-//            req.predicate = NSPredicate(format: "name contains %@", "R")
-//            req.returnsObjectsAsFaults = false
-            
-            do {
-                let res = try context.fetch(req)
-                if !res.isEmpty{
-//                    (res as! [FolderData]).forEach({ f in
-//    //                    let name = u.value(forKey: "name")
-//    //                    let email = u.value(forKey: "email")
-//                        print(f)
-//                    })
-                    
-                    (res as! [NSManagedObject]).forEach({ f in
-                                           let name = f.value(forKey: "folderName")
-                                           print(name)
-                                       })
-                }
-            } catch {
-                print(error)
-            }
         }
     
         //  MARK: REGISTERING CELL WITH TABLE VIEW
