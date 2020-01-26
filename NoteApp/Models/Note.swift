@@ -8,11 +8,10 @@
 
 import Foundation
 
-struct Note : Codable, CustomStringConvertible {
+struct Note : Codable, Equatable, CustomStringConvertible {
     var noteName : String
-    var index : Int?
-    var images: [String] = []
-    var audios: [String] = []
+    var strFiles: [String] = []
+    
     var description: String{
         return noteName
     }

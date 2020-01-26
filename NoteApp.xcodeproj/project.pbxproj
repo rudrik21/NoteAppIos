@@ -23,6 +23,10 @@
 		83CB138223D9FCC100117A88 /* FoldersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB138123D9FCC100117A88 /* FoldersVC.swift */; };
 		83CB138423D9FF5F00117A88 /* TakeNoteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB138323D9FF5F00117A88 /* TakeNoteVC.swift */; };
 		83CB138823DA015800117A88 /* ListFoldersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83CB138723DA015800117A88 /* ListFoldersVC.swift */; };
+		83EB1A2423DD39D4005AF19D /* AudioCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EB1A2023DD39D4005AF19D /* AudioCell.swift */; };
+		83EB1A2523DD39D4005AF19D /* ImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83EB1A2123DD39D4005AF19D /* ImageCell.swift */; };
+		83EB1A2623DD39D4005AF19D /* AudioCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83EB1A2223DD39D4005AF19D /* AudioCell.xib */; };
+		83EB1A2723DD39D4005AF19D /* ImageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83EB1A2323DD39D4005AF19D /* ImageCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,10 @@
 		83CB138123D9FCC100117A88 /* FoldersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldersVC.swift; sourceTree = "<group>"; };
 		83CB138323D9FF5F00117A88 /* TakeNoteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeNoteVC.swift; sourceTree = "<group>"; };
 		83CB138723DA015800117A88 /* ListFoldersVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListFoldersVC.swift; sourceTree = "<group>"; };
+		83EB1A2023DD39D4005AF19D /* AudioCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioCell.swift; sourceTree = "<group>"; };
+		83EB1A2123DD39D4005AF19D /* ImageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCell.swift; sourceTree = "<group>"; };
+		83EB1A2223DD39D4005AF19D /* AudioCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioCell.xib; sourceTree = "<group>"; };
+		83EB1A2323DD39D4005AF19D /* ImageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +102,10 @@
 		83CB136A23D8E9EA00117A88 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				83EB1A2023DD39D4005AF19D /* AudioCell.swift */,
+				83EB1A2223DD39D4005AF19D /* AudioCell.xib */,
+				83EB1A2123DD39D4005AF19D /* ImageCell.swift */,
+				83EB1A2323DD39D4005AF19D /* ImageCell.xib */,
 				83CB136B23D8E9EA00117A88 /* NoteCell.swift */,
 				83CB136C23D8E9EA00117A88 /* FolderCell.swift */,
 			);
@@ -179,8 +191,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83EB1A2623DD39D4005AF19D /* AudioCell.xib in Resources */,
 				83CB136323D8E83E00117A88 /* LaunchScreen.storyboard in Resources */,
 				83CB136023D8E83E00117A88 /* Assets.xcassets in Resources */,
+				83EB1A2723DD39D4005AF19D /* ImageCell.xib in Resources */,
 				83CB135B23D8E83D00117A88 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -196,6 +210,7 @@
 				83CB137C23D8E9EA00117A88 /* utils.swift in Sources */,
 				83CB138023D9F9A300117A88 /* NotesVC.swift in Sources */,
 				83CB138223D9FCC100117A88 /* FoldersVC.swift in Sources */,
+				83EB1A2423DD39D4005AF19D /* AudioCell.swift in Sources */,
 				83CB135423D8E83D00117A88 /* AppDelegate.swift in Sources */,
 				83CB138423D9FF5F00117A88 /* TakeNoteVC.swift in Sources */,
 				83CB137E23D8E9EA00117A88 /* Note.swift in Sources */,
@@ -205,6 +220,7 @@
 				83CB138823DA015800117A88 /* ListFoldersVC.swift in Sources */,
 				83CB137723D8E9EA00117A88 /* FolderCell.swift in Sources */,
 				83CB137D23D8E9EA00117A88 /* Folder.swift in Sources */,
+				83EB1A2523DD39D4005AF19D /* ImageCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -355,7 +371,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "back-benchers.NoteApp1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -374,7 +390,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = "back-benchers.NoteApp1";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

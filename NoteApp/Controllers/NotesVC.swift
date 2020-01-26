@@ -104,12 +104,14 @@ var shouldEdit = false
     @IBAction func onDeleteNote(_ sender: UIBarButtonItem) {
         let alert = UIAlertController(title: "Delete", message: "Are you sure?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: { (act) in
-                for (i, cell) in self.tvNotes.visibleCells.enumerated(){
+                var deletingNotes: [Note] = []
+                self.tvNotes.visibleCells.forEach({ (cell) in
                     if cell.accessoryType == UITableViewCell.AccessoryType.checkmark{
-                        let note = (self.currentFolder?.notes[i])!
-                        self.currentFolder?.removeNote(note: note)
+                        let i = self.tvNotes.indexPath(for: cell)?.row
+                        deletingNotes.append((self.currentFolder?.notes[i!])!)
                     }
-                }
+                })
+                self.currentFolder?.removeNote(notes: deletingNotes)
                 self.updateTable()
             }))
         

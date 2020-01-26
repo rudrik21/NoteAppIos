@@ -311,34 +311,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Sd-3k-LAW">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Wcj-aM-GXg">
                                 <rect key="frame" x="0.0" y="44" width="375" height="623"/>
-                                <color key="backgroundColor" red="0.12771538599999999" green="0.16868775550000001" blue="0.21907907269999999" alpha="0.92542363559999996" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="textColor" red="0.59897691009999998" green="0.73760157820000005" blue="0.91767090559999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JdM-X4-Hm6">
-                                <rect key="frame" x="39" y="626" width="46" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                            </button>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="4Sd-3k-LAW">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="311.5"/>
+                                        <color key="backgroundColor" red="0.12771538599999999" green="0.16868775550000001" blue="0.21907907269999999" alpha="0.92542363559999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="textColor" red="0.59897691009999998" green="0.73760157820000005" blue="0.91767090559999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bg5-ff-93H">
+                                        <rect key="frame" x="0.0" y="311.5" width="375" height="311.5"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OUn-hc-8bn">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells/>
+                                    </collectionView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.12771538599999999" green="0.16868775550000001" blue="0.21907907269999999" alpha="0.92542363559999996" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="4Sd-3k-LAW" firstAttribute="top" secondItem="b8Y-sQ-vS5" secondAttribute="top" id="JZs-SP-K9Y"/>
-                            <constraint firstItem="4Sd-3k-LAW" firstAttribute="trailing" secondItem="b8Y-sQ-vS5" secondAttribute="trailing" id="Phf-9G-Nfb"/>
-                            <constraint firstAttribute="bottom" secondItem="4Sd-3k-LAW" secondAttribute="bottom" id="Qvc-ai-G7g"/>
-                            <constraint firstItem="4Sd-3k-LAW" firstAttribute="leading" secondItem="b8Y-sQ-vS5" secondAttribute="leading" id="uiC-dP-XVL"/>
+                            <constraint firstAttribute="bottom" secondItem="Wcj-aM-GXg" secondAttribute="bottom" id="7hS-QE-6zb"/>
+                            <constraint firstItem="Wcj-aM-GXg" firstAttribute="leading" secondItem="IPJ-0g-OQX" secondAttribute="leading" id="9Ka-Sg-7Z0"/>
+                            <constraint firstAttribute="trailing" secondItem="Wcj-aM-GXg" secondAttribute="trailing" id="RLb-Nx-WZs"/>
+                            <constraint firstItem="Wcj-aM-GXg" firstAttribute="top" secondItem="b8Y-sQ-vS5" secondAttribute="top" id="ZiB-lC-901"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="b8Y-sQ-vS5"/>
                     </view>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="PqE-Pu-fN6"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="ETg-wz-TYq"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="cvFiles" destination="Bg5-ff-93H" id="nB3-aB-oF0"/>
                         <outlet property="navBar" destination="ETg-wz-TYq" id="EyB-C8-ptq"/>
                         <outlet property="txtNote" destination="4Sd-3k-LAW" id="cea-50-2RP"/>
                     </connections>

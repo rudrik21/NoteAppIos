@@ -17,6 +17,9 @@ class ListFoldersVC: UIViewController {
     
     @IBOutlet weak var tvListFolders: UITableView!
     
+    override func viewDidLoad() {
+        start()
+    }
     
     func start() {
         tvListFolders.delegate = self
@@ -41,6 +44,7 @@ extension ListFoldersVC : UITableViewDelegate, UITableViewDataSource {
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell") as? FolderCell {
                     let folder : Folder = Folder.folders[indexPath.row]
+                print("ListFOlder Cell: ", folder.folderName)
                     cell.textLabel?.text = folder.folderName
                     cell.detailTextLabel?.text = String(folder.notes.count)
                     return cell

@@ -22,33 +22,33 @@ struct Folder : CustomStringConvertible {
 
 extension Folder{
     mutating func addNote(note : Note) {
-        notes.append(note)
+        self.notes.append(note)
         updateCurrent()
     }
     
-    mutating func updateNote(note: Note, index : Int) {
-        let i = self.notes.filter { (n) -> Bool in
-            n.index == note.index
-            }.first?.index
-        self.notes[i!] = note
+    mutating func updateNote(newNote: Note, oldNote: Note) {
+//        let i = self.notes.filter { (n) -> Bool in
+//            n.index == note.index
+//            }.first?.index
+//        self.notes[i!] = note
+        self.notes.remove(at: notes.firstIndex(of: oldNote)!)
+        self.notes.append(newNote)
         updateCurrent()
     }
     
     mutating func moveNote(notes: [Note], toFolder: Folder) {
-        notes.forEach { (note) in
-            Folder.folders[toFolder.index].notes.append(Note(noteName: note.noteName, index: Folder.folders[toFolder.index].notes.count))
-        }
         
         for n in notes{
-            self.removeNote(note: n)
+            self.removeNote(notes: [n])
+            Folder.folders[toFolder.index].notes.append(n)
         }
+        
         Folder.folders[self.index] = self
     }
     
-    mutating func removeNote(note: Note) {
-        self.notes.removeAll { (n) -> Bool in
-//            print("\(n.index) == \(note.index)")
-            return n.index == note.index
+    mutating func removeNote(notes: [Note]) {
+        self.notes.forEach { (n) in
+            self.notes.remove(at: self.notes.firstIndex(of: n)!)
         }
         updateCurrent()
     }
