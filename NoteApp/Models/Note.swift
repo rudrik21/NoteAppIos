@@ -11,9 +11,11 @@ import Foundation
 struct Note : Codable, Equatable, CustomStringConvertible {
     var noteName : String
     var strFiles: [String] = []
+    var lat: Double?
+    var long: Double?
     
     var description: String{
-        return noteName
+        return "Note: \(noteName), lat: \(lat), long: \(long)"
     }
     
 }

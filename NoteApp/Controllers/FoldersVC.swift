@@ -26,16 +26,9 @@ class FoldersVC: UIViewController {
             tvFolders.dataSource = self
             tvFolders.backgroundColor = #colorLiteral(red: 0.127715386, green: 0.1686877555, blue: 0.2190790727, alpha: 0.9254236356)
             tvFolders.rowHeight = 50
-            initFolderCell()
-            
-//            NotificationCenter.default.addObserver(self, selector: #selector(inBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
             
         }
     
-        //  MARK: REGISTERING CELL WITH TABLE VIEW
-        func initFolderCell() {
-    //        tvFolders.register(UINib(nibName: "FolderCell", bundle: nil), forCellReuseIdentifier: "FolderCell")
-        }
         
         //  MARK: ON CREATE NEW FOLDER
         @IBAction func onAddNewFolder(_ sender: UIBarButtonItem) {
@@ -84,13 +77,13 @@ class FoldersVC: UIViewController {
 
         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
             if let cell : FolderCell = sender as? FolderCell {
-                let folder = Folder.folders.filter { (f) -> Bool in
-                    f.folderName == cell.textLabel?.text
-                }.first
+//                let folder = Folder.folders.filter { (f) -> Bool in
+//                    f.folderName == cell.textLabel?.text
+//                }.first
                 
                 if let notesVC = segue.destination as? NotesVC {
                         notesVC.delegate = self
-                        notesVC.currentFolder = folder
+                    notesVC.currentFolder = Folder.folders[tvFolders.indexPath(for: cell)!.row]
                 }
             }
         }

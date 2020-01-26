@@ -7,12 +7,15 @@
 //
 
 import UIKit
+import CoreLocation
 
-class TakeNoteVC: UIViewController {
+class TakeNoteVC: UIViewController, CLLocationManagerDelegate {
 
     var delegate : NotesVC?
     var currentNote: Note?
     var newNote: Note?
+    var manager: CLLocationManager?
+    var userLocation: CLLocation?
     
     @IBOutlet weak var navBar: UINavigationItem!
     
@@ -24,6 +27,7 @@ class TakeNoteVC: UIViewController {
         super.viewDidLoad()
         start()
         initCollectionView()
+        initLocation()
     }
     
     func start() {
@@ -51,6 +55,17 @@ class TakeNoteVC: UIViewController {
         
     }
 
+    func initLocation() {
+        manager = CLLocationManager()
+        manager?.delegate = self
+        manager?.requestWhenInUseAuthorization()
+        manager?.desiredAccuracy = kCLLocationAccuracyBest
+        manager?.startUpdatingLocation()
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        userLocation = locations.first
+    }
     /*
     // MARK: - Navigation
 
@@ -66,10 +81,14 @@ class TakeNoteVC: UIViewController {
             if !txtNote.text.isEmpty{
                 if let oldNote = currentNote {
                     newNote!.noteName = txtNote.text
+                    newNote?.lat = userLocation?.coordinate.latitude
+                    newNote?.long = userLocation?.coordinate.longitude
                     delegate?.currentFolder?.updateNote(newNote: newNote!, oldNote: oldNote)
                     
                 }else{
                     newNote = Note(noteName: txtNote.text, strFiles: [])
+                    newNote?.lat = userLocation?.coordinate.latitude
+                    newNote?.long = userLocation?.coordinate.longitude
                     delegate?.currentFolder?.addNote(note: newNote!)
                 }
             }

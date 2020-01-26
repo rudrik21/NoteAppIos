@@ -32,9 +32,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let context = delegate.persistentContainer.viewContext
         
         if !Folder.folders.isEmpty{
+            var count = 0
             Folder.folders.forEach { (folder) in
                 let f : FolderData = NSEntityDescription.insertNewObject(forEntityName: "FolderData", into: context) as! FolderData
                     f.folder = folder
+//                    f.folder.index = count
+                    f.folderIndex = Int32(count)
+                    count += 1
                 do{
                     try context.save()
                 }catch{}
