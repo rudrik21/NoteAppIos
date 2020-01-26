@@ -13,6 +13,7 @@ import AVFoundation
 class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate{
    // @IBOutlet weak var imageTake: UIImageView!
     
+    @IBOutlet weak var record_brn: UIBarButtonItem!
     var imagePicker: UIImagePickerController!
     var alert : UIAlertController?
     var alert2 : UIAlertController?
@@ -69,13 +70,15 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
     }
   
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let imageName = UUID().uuidString
-        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
-        print(imagePath)
-        newNote?.strFiles.append("\(imagePath)")
-        print("okokokok")
-        print(newNote?.strFiles)
+    func imagePickerController(_ picker: UIImagePickerController,didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+            let imageName = UUID().uuidString
+            let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+            print(imagePath)
+            newNote?.strFiles.append("\(imagePath)")
+            print("okokokok")
+            print(newNote?.strFiles)
         //dismiss(animated: true, completion: nil)
     }
     
@@ -85,26 +88,37 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
     }
     
     @IBAction func recordAudio(_ sender: Any) {
-        
-        let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
-        let recordSetting = [ AVFormatIDKey : kAudioFormatAppleLossless ,
-                              AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
-                              AVEncoderBitRateKey : 320000,
-                              AVNumberOfChannelsKey : 2,
-                              AVSampleRateKey : 44100.2 ] as [String : Any]
-        do {
-            SoundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordSetting)
-            SoundRecorder.delegate = self
-            SoundRecorder.prepareToRecord()
-            newNote?.strFiles.append("\(audioFilename)")
-            print("okokokok")
-            print(newNote?.strFiles)
-        } catch {
-            print(error)
+        startRecording()
+       
+        if record_brn.title == "Record" {
+            SoundRecorder.record()
+            record_brn.title = "Stop"
+          
+        } else {
+            SoundRecorder.stop()
+          record_brn.title = "Record"
+            
         }
-        
     }
     
+    func startRecording() {
+        
+        let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
+               let recordSetting = [ AVFormatIDKey : kAudioFormatAppleLossless ,
+                                     AVEncoderAudioQualityKey:AVAudioQuality.max.rawValue,
+                                     AVEncoderBitRateKey : 320000,
+                                     AVNumberOfChannelsKey : 2,
+                                     AVSampleRateKey : 44100.2 ] as [String : Any]
+               do {
+                       SoundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordSetting)
+                       SoundRecorder.delegate = self
+                       SoundRecorder.prepareToRecord()
+                       newNote?.strFiles.append("\(audioFilename)")
+                       print(newNote?.strFiles)
+               } catch {
+                   print(error)
+               }
+    }
     
     
     func start() {

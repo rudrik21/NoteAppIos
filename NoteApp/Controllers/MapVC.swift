@@ -17,6 +17,7 @@ class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
     var locatioManager = CLLocationManager()
     var address = ""
     var delegate : TakeNoteVC?
+    var annotation = MKPointAnnotation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,10 @@ class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
                 locatioManager.startUpdatingLocation()
         
                 var desti = CLLocationCoordinate2D(latitude: delegate?.currentNote?.lat ?? 0.0, longitude: delegate?.currentNote?.long ?? 0.0)
+        
+            annotation.title = address
+            annotation.coordinate = desti
+            mapView.addAnnotation(annotation)
         
         showDirection(destination: desti, type: .automobile)
       
@@ -95,6 +100,42 @@ class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
             
         }
             
+        
+        @objc func onTap(gestureRecognizer : UIGestureRecognizer){
+            
+          
+            if gestureRecognizer.state == .ended{
+              
+                     let destination_loaction = gestureRecognizer.location(in: mapView)
+                       coordinate = mapView.convert(destination_loaction, toCoordinateFrom: mapView)
+                          let annotation = MKPointAnnotation()
+                
+            mapView.removeAnnotations(mapView.annotations)
+            mapView.removeOverlays(mapView.overlays)
+                CLGeocoder().reverseGeocodeLocation(CLLocation(coordinate: coordinate, altitude: 0, horizontalAccuracy: 0, verticalAccuracy: 0, course: 0, speed: 0, timestamp: Date())) { (placemark, error) in
+                               
+                               if let error = error{
+                                   print(error)
+                               }else{
+                                   
+                                   if let placemark = placemark?[0]{
+                                      
+                                       self.address = ""
+                                       if placemark.name != nil{
+                                           self.address = placemark.name!
+                                       }
+                                   }
+                               }
+                           }
+
+                             annotation.title = address
+                             annotation.coordinate = coordinate
+                                
+                             mapView.addAnnotation(annotation)
+           
+            
+        }
+        }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
          

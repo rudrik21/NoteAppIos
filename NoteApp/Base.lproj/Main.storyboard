@@ -347,7 +347,7 @@
                     <toolbarItems/>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="ETg-wz-TYq">
                         <rightBarButtonItems>
-                            <barButtonItem title="Item" image="mic.fill" catalog="system" id="YOP-tC-NFM">
+                            <barButtonItem title="Record" id="YOP-tC-NFM">
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <connections>
                                     <action selector="recordAudio:" destination="Tza-dt-i3O" id="ia8-WM-lf0"/>
@@ -371,6 +371,7 @@
                     <connections>
                         <outlet property="cvFiles" destination="Bg5-ff-93H" id="nB3-aB-oF0"/>
                         <outlet property="navBar" destination="ETg-wz-TYq" id="EyB-C8-ptq"/>
+                        <outlet property="record_brn" destination="YOP-tC-NFM" id="sQX-Yp-viS"/>
                         <outlet property="txtNote" destination="4Sd-3k-LAW" id="cea-50-2RP"/>
                     </connections>
                 </viewController>
@@ -400,6 +401,9 @@
                         <viewLayoutGuide key="safeArea" id="e2t-9t-3Ip"/>
                     </view>
                     <navigationItem key="navigationItem" id="F5s-q7-tHG"/>
+                    <connections>
+                        <outlet property="mapView" destination="RNC-5C-CW6" id="XZM-fS-9mO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyg-8y-Ftx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -412,7 +416,6 @@
         <image name="folder-icon" width="512" height="512"/>
         <image name="folder.fill.badge.plus" catalog="system" width="64" height="42"/>
         <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
-        <image name="mic.fill" catalog="system" width="54" height="64"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
         <image name="trash" catalog="system" width="60" height="64"/>
         <image name="tray.and.arrow.down.fill" catalog="system" width="64" height="56"/>
