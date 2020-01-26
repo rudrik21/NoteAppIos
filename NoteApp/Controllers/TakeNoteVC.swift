@@ -8,8 +8,9 @@
 
 import UIKit
 import CoreLocation
+import AVFoundation
 
-class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate{
    // @IBOutlet weak var imageTake: UIImageView!
     
     var imagePicker: UIImagePickerController!
@@ -20,6 +21,8 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
     var newNote: Note?
     var manager: CLLocationManager?
     var userLocation: CLLocation?
+    var SoundRecorder: AVAudioRecorder!
+     var fileName : String = "audioFile.m4a"
     
     @IBOutlet weak var navBar: UINavigationItem!
     
@@ -81,6 +84,21 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
     }
     
     @IBAction func recordAudio(_ sender: Any) {
+        
+        let audioFilename = getDocumentsDirectory().appendingPathComponent(fileName)
+        let recordSetting = [ AVFormatIDKey : kAudioFormatAppleLossless ,
+                              AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
+                              AVEncoderBitRateKey : 320000,
+                              AVNumberOfChannelsKey : 2,
+                              AVSampleRateKey : 44100.2 ] as [String : Any]
+        do {
+            SoundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordSetting)
+            SoundRecorder.delegate = self
+            SoundRecorder.prepareToRecord()
+        } catch {
+            print(error)
+        }
+        
     }
     
     
