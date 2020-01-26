@@ -20,10 +20,16 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>allow app to use camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>always</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>when in use</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>allow app to use library to save it in case we need</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow app to take media from library</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

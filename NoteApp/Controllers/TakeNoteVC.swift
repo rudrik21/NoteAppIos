@@ -9,8 +9,12 @@
 import UIKit
 import CoreLocation
 
-class TakeNoteVC: UIViewController, CLLocationManagerDelegate {
-
+class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+   // @IBOutlet weak var imageTake: UIImageView!
+    
+    var imagePicker: UIImagePickerController!
+    var alert : UIAlertController?
+    var alert2 : UIAlertController?
     var delegate : NotesVC?
     var currentNote: Note?
     var newNote: Note?
@@ -25,12 +29,64 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        newNote?.strFiles = ["ru","ko"]
+        print(newNote?.strFiles)
+        imagePicker = UIImagePickerController()
+        imagePicker.delegate = self
         start()
         initCollectionView()
         initLocation()
     }
+    @IBAction func takeImage(_ sender: Any) {
+        alert = UIAlertController(title: "Do want to add media?", message: "Choose any of them.", preferredStyle: .actionSheet)
+
+        alert!.addAction(UIAlertAction(title: "Open Gallary", style: .default, handler: { (addImage) in
+        
+            self.imagePicker.sourceType = .photoLibrary
+            self.present(self.imagePicker, animated: true, completion: nil)
+                    
+        }))
+
+       alert!.addAction(UIAlertAction(title: "Open Camera", style: .default, handler: { (addImage2) in
+
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera){
+             self.imagePicker.sourceType = .camera
+            self.present(self.imagePicker, animated: true, completion: nil)
+        }else{
+            self.alert2 = UIAlertController(title: "Sorry We are unable to open camera", message: "Choose from gallary.", preferredStyle: .alert)
+            self.alert2!.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+            self.present(self.alert2!, animated: true)
+     }
+        
+       }))
+       self.present(alert!, animated: true)
+        
+    }
+  
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        let imageName = UUID().uuidString
+        let imagePath = getDocumentsDirectory().appendingPathComponent(imageName)
+        print(imagePath)
+        newNote?.strFiles.append("\(imagePath)")
+        print("okokokok")
+        print(newNote?.strFiles)
+        //dismiss(animated: true, completion: nil)
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    @IBAction func recordAudio(_ sender: Any) {
+    }
+    
+    
     
     func start() {
+        newNote?.strFiles = ["",""]
         var navTitle: String?
         if let currentNote = currentNote{
             navTitle = String((currentNote.noteName.prefix(upTo: (currentNote.noteName.index((currentNote.noteName.startIndex), offsetBy: (currentNote.noteName.count)/2))))) + "....."
@@ -44,6 +100,9 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate {
         
         newNote?.strFiles.append("abc.png")
         newNote?.strFiles.append("song.mp3")
+        
+        print("me")
+        print(newNote?.strFiles)
     }
     
     func initCollectionView() {

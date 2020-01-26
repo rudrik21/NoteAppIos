@@ -136,7 +136,7 @@
                         <userGuides>
                             <userLayoutGuide location="578" affinity="minY"/>
                             <userLayoutGuide location="415" affinity="minY"/>
-                            <userLayoutGuide location="492" affinity="minY"/>
+                            <userLayoutGuide location="490" affinity="minY"/>
                             <userLayoutGuide location="485" affinity="minY"/>
                         </userGuides>
                         <subviews>
@@ -345,7 +345,25 @@
                         <viewLayoutGuide key="safeArea" id="b8Y-sQ-vS5"/>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="ETg-wz-TYq"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="ETg-wz-TYq">
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" image="mic.fill" catalog="system" id="YOP-tC-NFM">
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <connections>
+                                    <action selector="recordAudio:" destination="Tza-dt-i3O" id="ia8-WM-lf0"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="camera.fill" catalog="system" id="jfD-dS-qcI">
+                                <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <connections>
+                                    <action selector="takeImage:" destination="Tza-dt-i3O" id="YPf-rl-aLJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Item" image="mappin.and.ellipse" catalog="system" id="KKM-LT-D0h">
+                                <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cvFiles" destination="Bg5-ff-93H" id="nB3-aB-oF0"/>
@@ -359,9 +377,12 @@
         </scene>
     </scenes>
     <resources>
+        <image name="camera.fill" catalog="system" width="64" height="48"/>
         <image name="ellipsis" catalog="system" width="64" height="18"/>
         <image name="folder-icon" width="512" height="512"/>
         <image name="folder.fill.badge.plus" catalog="system" width="64" height="42"/>
+        <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
+        <image name="mic.fill" catalog="system" width="54" height="64"/>
         <image name="pencil.and.ellipsis.rectangle" catalog="system" width="64" height="40"/>
         <image name="trash" catalog="system" width="60" height="64"/>
         <image name="tray.and.arrow.down.fill" catalog="system" width="64" height="56"/>
