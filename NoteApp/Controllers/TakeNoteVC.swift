@@ -39,6 +39,7 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
         start()
         initCollectionView()
         initLocation()
+        
     }
     @IBAction func takeImage(_ sender: Any) {
         alert = UIAlertController(title: "Do want to add media?", message: "Choose any of them.", preferredStyle: .actionSheet)
@@ -212,6 +213,14 @@ extension TakeNoteVC: UICollectionViewDelegate, UICollectionViewDataSource{
             }
         }
         return UICollectionViewCell()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+                       if let map = segue.destination as? MapVC {
+                               map.delegate = self
+                          
+                       }
     }
     
 }

@@ -7,24 +7,110 @@
 //
 
 import UIKit
-
-class MapVC: UIViewController {
-
+import CoreLocation
+import MapKit
+class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
+    
+    
+    var coordinate : CLLocationCoordinate2D!
+    @IBOutlet weak var mapView: MKMapView!
+    var locatioManager = CLLocationManager()
+    var address = ""
+    var delegate : TakeNoteVC?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
+                locatioManager.delegate = self
+                mapView.delegate = self
+                locatioManager.desiredAccuracy = kCLLocationAccuracyBest
+                locatioManager.requestWhenInUseAuthorization()
+                locatioManager.startUpdatingLocation()
+        
+                var desti = CLLocationCoordinate2D(latitude: delegate?.currentNote?.lat ?? 0.0, longitude: delegate?.currentNote?.long ?? 0.0)
+        
+        showDirection(destination: desti, type: .automobile)
+      
+        }
+ 
+        func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+            //getting users location
+            let userLoaction : CLLocation = locations[0]
+            
+            let lat = userLoaction.coordinate.latitude
+            let long = userLoaction.coordinate.longitude
+            
+            let latDelta:CLLocationDegrees = 0.05
+            let longDelta:CLLocationDegrees = 0.05
+            
+            let span = MKCoordinateSpan(latitudeDelta: latDelta, longitudeDelta: longDelta)
+            
+            let loaction = CLLocationCoordinate2D(latitude: lat, longitude: long)
+            
+            let region = MKCoordinateRegion(center: loaction, span: span)
+            mapView.setRegion(region, animated: true)
+            
+            print(userLoaction)
+
+                
+            }
+        
+        func showDirection(destination : CLLocationCoordinate2D,type :MKDirectionsTransportType){
+            
+       
+            if destination != nil{
+                let souceCordinate = mapView.annotations.first!.coordinate
+                 
+                 let soucePlaceMark = MKPlacemark(coordinate: souceCordinate)
+                 let destPlaceMark = MKPlacemark(coordinate: destination)
+                 
+                 let sourceItem = MKMapItem(placemark: soucePlaceMark)
+                 let destItem = MKMapItem(placemark: destPlaceMark)
+                 
+                 let destinationRequest = MKDirections.Request()
+                 destinationRequest.source = sourceItem
+                 destinationRequest.destination = destItem
+                 destinationRequest.transportType = type
+                 destinationRequest.requestsAlternateRoutes = true
+                 
+                 let directions = MKDirections(request: destinationRequest)
+                 directions.calculate { (response, error) in
+                     guard let response = response else {
+                         if let error = error {
+                             print("Something is wrong :(")
+                         }
+                         return
+                     }
+                     
+                   let route = response.routes[0]
+                    print(route)
+                    self.mapView.addOverlay(route.polyline)
+                    print("hi")
+                //  self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                     
+                 }
+            }else{
+                print("choose desti")
+            }
+            
+        }
+            
+        
+        func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+         
+            if overlay is  MKPolyline{
+             
+            let render = MKPolylineRenderer(overlay: overlay)
+            render.strokeColor = .darkGray
+            render.lineWidth = 4.0
+            return render
+        }
+            return MKOverlayRenderer()
+        
+            }
+
+            
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

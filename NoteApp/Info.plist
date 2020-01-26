@@ -24,6 +24,8 @@
 	<string>allow app to use camera</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>always</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>not so really needed</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>when in use</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
