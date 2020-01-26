@@ -361,6 +361,9 @@
                             </barButtonItem>
                             <barButtonItem title="Item" image="mappin.and.ellipse" catalog="system" id="KKM-LT-D0h">
                                 <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <segue destination="EOs-v6-cKG" kind="show" id="6CR-93-91l"/>
+                                </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
@@ -374,6 +377,33 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="728-ST-jwB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1469.5999999999999" y="76.011994002998506"/>
+        </scene>
+        <!--MapVC-->
+        <scene sceneID="sMe-Id-5FQ">
+            <objects>
+                <viewController id="EOs-v6-cKG" customClass="MapVC" customModule="NoteApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="64j-T4-J4j">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RNC-5C-CW6">
+                                <rect key="frame" x="0.0" y="54" width="375" height="554"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="RNC-5C-CW6" firstAttribute="top" secondItem="e2t-9t-3Ip" secondAttribute="top" constant="10" id="BkP-fo-bHd"/>
+                            <constraint firstItem="RNC-5C-CW6" firstAttribute="leading" secondItem="e2t-9t-3Ip" secondAttribute="leading" id="d9I-Gs-nJU"/>
+                            <constraint firstItem="e2t-9t-3Ip" firstAttribute="trailing" secondItem="RNC-5C-CW6" secondAttribute="trailing" id="ouN-i2-Skc"/>
+                            <constraint firstItem="e2t-9t-3Ip" firstAttribute="bottom" secondItem="RNC-5C-CW6" secondAttribute="bottom" constant="10" id="ovJ-tW-WMH"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="e2t-9t-3Ip"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="F5s-q7-tHG"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dyg-8y-Ftx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2242" y="76"/>
         </scene>
     </scenes>
     <resources>

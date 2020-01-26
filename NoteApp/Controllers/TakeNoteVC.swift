@@ -95,6 +95,9 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
             SoundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordSetting)
             SoundRecorder.delegate = self
             SoundRecorder.prepareToRecord()
+            newNote?.strFiles.append("\(audioFilename)")
+            print("okokokok")
+            print(newNote?.strFiles)
         } catch {
             print(error)
         }
