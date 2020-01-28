@@ -55,8 +55,14 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
         txtNote.text = newNote?.noteName
         print("files", newNote?.strFiles)
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(releaseFocus))
+        navigationController?.navigationBar.addGestureRecognizer(tap)
         initCollectionView()
         
+    }
+    
+    @objc func releaseFocus() {
+            txtNote.resignFirstResponder()
     }
     
     func initCollectionView() {
