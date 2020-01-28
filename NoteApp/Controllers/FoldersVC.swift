@@ -20,7 +20,13 @@ class FoldersVC: UIViewController, UISearchResultsUpdating {
         override func viewDidLoad() {
             super.viewDidLoad()
             start()
+            let tap = UITapGestureRecognizer(target: self, action: #selector(releaseFocus))
+                    navigationController?.navigationBar.addGestureRecognizer(tap)
         }
+    
+    @objc func releaseFocus() {
+        resignFirstResponder()
+        }
         
         //  MARK: INITIALIZATION
         func start() {
@@ -181,6 +187,7 @@ class FoldersVC: UIViewController, UISearchResultsUpdating {
             let delete = UIContextualAction(style: .destructive, title: "Delete") { (act, v, _) in
                 if indexPath.section == 0{
                     Folder.folders.remove(at: indexPath.row)
+                    self.filteredFolders = Folder.folders
                     //   print(Folder.folders)
                 }
                             
