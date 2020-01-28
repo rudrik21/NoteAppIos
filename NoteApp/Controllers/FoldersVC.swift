@@ -9,10 +9,12 @@
 import UIKit
 import CoreData
 
-class FoldersVC: UIViewController {
+class FoldersVC: UIViewController, UISearchResultsUpdating {
 
     @IBOutlet weak var tvFolders: UITableView!
     @IBOutlet weak var navigationBar: UINavigationItem!
+    var search: UISearchController?
+    var filteredFolders: [Folder] = []
     
     //  MARK: viewDidLoad
         override func viewDidLoad() {
@@ -27,9 +29,39 @@ class FoldersVC: UIViewController {
             tvFolders.backgroundColor = #colorLiteral(red: 0.127715386, green: 0.1686877555, blue: 0.2190790727, alpha: 0.9254236356)
             tvFolders.rowHeight = 50
             
+            search = UISearchController(searchResultsController: nil)
+            search?.searchResultsUpdater = self
+            search?.obscuresBackgroundDuringPresentation = false
+            search?.searchBar.placeholder = "Search..."
+            navigationItem.searchController = search
+            
+            search?.searchBar.text = ""
+            filteredFolders = Folder.folders
         }
     
-        
+        func updateSearchResults(for searchController: UISearchController) {
+               guard let text = searchController.searchBar.text else { return }
+            if text.isEmpty {
+                filteredFolders = Folder.folders
+                tvFolders.reloadData()
+            }else{
+                var res = [Folder]()
+                Folder.folders.forEach { (f) in
+                    var counter = 0
+                    f.notes.forEach { (n) in
+                        if n.noteName.contains(text){
+                            counter += 1
+                        }
+                    }
+                    if counter > 0{
+                        res.append(f)
+                    }
+                }
+                filteredFolders = res
+                tvFolders.reloadData()
+            }
+        }
+    
         //  MARK: ON CREATE NEW FOLDER
         @IBAction func onAddNewFolder(_ sender: UIBarButtonItem) {
             createNewFolder(title: "New Folder", "Enter a name for this folder.")
@@ -52,6 +84,8 @@ class FoldersVC: UIViewController {
                             f.folderName == name
                         }.isEmpty) {
                             Folder.folders.append(Folder(folderName: name, index: Folder.folders.count))
+                            self.search?.searchBar.text = ""
+                            self.filteredFolders = Folder.folders
                         }else{
                             showPopup(vc: self, title: "Name Taken", msg: "Please choose a different name", btnText: "OK")
                         }
@@ -97,14 +131,14 @@ class FoldersVC: UIViewController {
     extension FoldersVC : UITableViewDelegate, UITableViewDataSource{
         
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-            return Folder.folders.count
+            return filteredFolders.count
         }
             
         //  MARK: Cells
         func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
             
             if let cell = tableView.dequeueReusableCell(withIdentifier: "FolderCell") as? FolderCell {
-                let folder : Folder = Folder.folders[indexPath.row]
+                let folder : Folder = filteredFolders[indexPath.row]
                 
                 if indexPath.section == 0{
                     cell.textLabel?.text = folder.folderName
@@ -119,7 +153,7 @@ class FoldersVC: UIViewController {
         
         //  MARK: ON MOVE ROW
         func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-            return true
+            return (filteredFolders.count == Folder.folders.count) ? true : false
         }
         
         func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
@@ -135,7 +169,6 @@ class FoldersVC: UIViewController {
             Folder.folders[destinationIndexPath.row].index = destinationIndexPath.row
             
             self.tvFolders.moveRow(at: sourceIndexPath, to: destinationIndexPath)
-            
         }
         
         //  MARK: ON DELETE ROW
