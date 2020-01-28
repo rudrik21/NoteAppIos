@@ -49,12 +49,9 @@ extension Folder{
     }
     
     mutating func removeNote(rNotes: [Note]) {
-        for (i, n) in self.notes.enumerated() {
-            rNotes.forEach { (rn) in
-                if n.noteName == rn.noteName && n.timeStamp == rn.timeStamp {
-                    print(n)
-                    self.notes.remove(at: i)
-                }
+        rNotes.forEach { (rn) in
+            if let index = self.notes.firstIndex(of: rn){
+                self.notes.remove(at: index)
             }
         }
         updateCurrent()
