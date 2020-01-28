@@ -48,7 +48,7 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
             newNote = currentNote
         }else{
             navTitle = "New Note"
-            newNote = Note(noteName: "")
+            newNote = Note(noteName: "", timeStamp: getTimeStamp())
         }
         navBar.title = navTitle
         txtNote.becomeFirstResponder()

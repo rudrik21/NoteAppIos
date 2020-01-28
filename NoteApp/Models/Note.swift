@@ -13,9 +13,10 @@ struct Note : Codable, Equatable, CustomStringConvertible {
     var strFiles: [String] = []
     var lat: Double = 0.00
     var long: Double = 0.00
+    var timeStamp: String?
     
     var description: String{
-        return "Note: \(noteName), lat: \(lat ), long: \(long )"
+        return "Note: \(noteName), lat: \(lat), long: \(long )"
     }
     
 }

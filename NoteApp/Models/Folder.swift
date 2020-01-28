@@ -51,7 +51,7 @@ extension Folder{
     mutating func removeNote(rNotes: [Note]) {
         for (i, n) in self.notes.enumerated() {
             rNotes.forEach { (rn) in
-                if n.noteName == rn.noteName && n.lat == rn.lat && n.long == rn.long && n.strFiles.count == rn.strFiles.count{
+                if n.noteName == rn.noteName && n.timeStamp == rn.timeStamp {
                     print(n)
                     self.notes.remove(at: i)
                 }
