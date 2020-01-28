@@ -13,7 +13,7 @@ import AVFoundation
 class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate{
    // @IBOutlet weak var imageTake: UIImageView!
     
-    @IBOutlet weak var record_brn: UIBarButtonItem!
+    @IBOutlet weak var record_btn: UIBarButtonItem!
     var imagePicker: UIImagePickerController!
     var alert : UIAlertController?
     var alert2 : UIAlertController?
@@ -22,7 +22,10 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
     var newNote: Note?
     var manager: CLLocationManager?
     var userLocation: CLLocation?
-    var SoundRecorder: AVAudioRecorder!
+    
+    var audioPlayer: AVAudioPlayer?
+    var recordingSession: AVAudioSession!
+    var audioRecorder: AVAudioRecorder!
     
     @IBOutlet weak var navBar: UINavigationItem!
     
@@ -51,9 +54,21 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
         txtNote.becomeFirstResponder()
         txtNote.text = newNote?.noteName
         print("files", newNote?.strFiles)
+        
         initCollectionView()
+        
     }
     
+    func initCollectionView() {
+        cvFiles.delegate = self
+        cvFiles.dataSource = self
+        
+        cvFiles.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
+        
+        cvFiles.register(UINib(nibName: "AudioCell", bundle: nil), forCellWithReuseIdentifier: "AudioCell")
+    }
+    
+    //  MARK: IMAGEs
     @IBAction func chooseImageFromPicker(_ sender: Any) {
         alert = UIAlertController(title: "Do want to add media?", message: "Choose any of them.", preferredStyle: .actionSheet)
 
@@ -138,48 +153,76 @@ class TakeNoteVC: UIViewController, CLLocationManagerDelegate,UIImagePickerContr
         return paths[0]
     }
     
+    //  RECORDING
     @IBAction func recordAudio(_ sender: Any) {
-        startRecording()
-       
-        if record_brn.title == "Record" {
-            SoundRecorder.record()
-            record_brn.title = "Stop"
-          
-        } else {
-            SoundRecorder.stop()
-          record_brn.title = "Record"
-            
+        recordingSession = AVAudioSession.sharedInstance()
+
+        do {
+            try recordingSession.setCategory(.playAndRecord, mode: .default)
+            try recordingSession.setActive(true)
+            recordingSession.requestRecordPermission() { [unowned self] allowed in
+                DispatchQueue.main.async {
+                    if allowed {
+                        self.recordTapped()
+                    } else {
+                        // failed to record!
+                    }
+                }
+            }
+        } catch {
+            // failed to record!
         }
     }
     
+//    func loadRecordingUI() {
+//        recordButton = UIButton(frame: CGRect(x: view.frame.maxX - 100, y: 64, width: 128, height: 64))
+//        recordButton.setTitle("Tap to Record", for: .normal)
+//        recordButton.titleLabel?.font = UIFont.preferredFont(forTextStyle: .title1)
+//        recordButton.addTarget(self, action: #selector(recordTapped), for: .touchUpInside)
+//        view.addSubview(recordButton)
+//    }
+    
     func startRecording() {
-        
-        let audioFilename = getDocumentsDirectory().appendingPathComponent("audio_\(getTimeStamp()).mp3")
-        
-            let recordSetting = [ AVFormatIDKey : kAudioFormatMPEGLayer3 ,
-                            AVEncoderAudioQualityKey:AVAudioQuality.max.rawValue,
-                                     AVEncoderBitRateKey : 320000,
-                                     AVNumberOfChannelsKey : 2,
-                                     AVSampleRateKey : 44100.2 ] as [String : Any]
-               do {
-                       SoundRecorder = try AVAudioRecorder(url: audioFilename, settings: recordSetting)
-                       SoundRecorder.delegate = self
-                       SoundRecorder.prepareToRecord()
-                       newNote?.strFiles.append("\(audioFilename)")
-                        print("saving audio", newNote?.strFiles ?? [])
-               } catch {
-                   print(error)
-               }
+        let audioFilename = getDocumentsDirectory().appendingPathComponent("audio\(getTimeStamp()).m4a")
+        recordingSession.accessibilityLabel = audioFilename.lastPathComponent
+
+        let settings = [
+            AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+            AVSampleRateKey: 12000,
+            AVNumberOfChannelsKey: 1,
+            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue
+        ]
+
+        do {
+            audioRecorder = try AVAudioRecorder(url: audioFilename, settings: settings)
+            audioRecorder.delegate = self
+            audioRecorder.record()
+
+        } catch {
+            finishRecording(success: false)
+        }
     }
     
-    func initCollectionView() {
-        cvFiles.delegate = self
-        cvFiles.dataSource = self
-        
-        cvFiles.register(UINib(nibName: "ImageCell", bundle: nil), forCellWithReuseIdentifier: "ImageCell")
-        
-        cvFiles.register(UINib(nibName: "AudioCell", bundle: nil), forCellWithReuseIdentifier: "AudioCell")
-        
+    func finishRecording(success: Bool) {
+        audioRecorder.stop()
+        print("Recording finished..")
+        newNote?.strFiles.append(recordingSession.accessibilityLabel!)
+        cvFiles.reloadData()
+        audioRecorder = nil
+    }
+    
+    @objc func recordTapped() {
+        if audioRecorder == nil {
+            startRecording()
+        } else {
+            finishRecording(success: true)
+        }
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
     }
 
     //  MARK: LOCATION
@@ -248,13 +291,13 @@ extension TakeNoteVC: UICollectionViewDelegate, UICollectionViewDataSource{
 //        return CGSize(width: 20, height: 20);
 //    }
 
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 3;
-    }
-
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
-        return 1;
-    }
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAtIndex section: Int) -> CGFloat {
+//        return 3;
+//    }
+//
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAtIndex section: Int) -> CGFloat {
+//        return 1;
+//    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return newNote?.strFiles.count ?? 0
@@ -280,6 +323,7 @@ extension TakeNoteVC: UICollectionViewDelegate, UICollectionViewDataSource{
             case ".mp3", ".m4a":
                 print("is audio")
                 if let cell : AudioCell = collectionView.dequeueReusableCell(withReuseIdentifier: "AudioCell", for: indexPath) as? AudioCell{
+                    cell.setAudio(player: AVAudioPlayer(), fileURL: getDocumentsDirectory().appendingPathComponent((newNote?.strFiles[indexPath.row])!))
                     
                     return cell
                 }
