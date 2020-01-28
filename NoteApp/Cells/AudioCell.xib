@@ -21,6 +21,9 @@
                         <state key="normal" image="play.fill" catalog="system">
                             <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="large" weight="bold"/>
                         </state>
+                        <connections>
+                            <action selector="onPlayAudio:" destination="gTV-IL-0wX" eventType="touchUpInside" id="5zs-e8-4Cz"/>
+                        </connections>
                     </button>
                 </subviews>
             </view>
@@ -31,6 +34,9 @@
                 <constraint firstAttribute="bottom" secondItem="0m2-Na-A9Y" secondAttribute="bottom" id="x7x-4L-dkZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <connections>
+                <outlet property="btnPlay" destination="0m2-Na-A9Y" id="vNy-bh-HqW"/>
+            </connections>
             <point key="canvasLocation" x="137.68115942028987" y="140.625"/>
         </collectionViewCell>
     </objects>

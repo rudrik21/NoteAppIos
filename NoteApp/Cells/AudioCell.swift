@@ -40,10 +40,10 @@ class AudioCell: UICollectionViewCell {
             print("playing: ", player.isPlaying)
             if player.isPlaying {
                 player.stop()
-//                btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
+                btnPlay.setImage(UIImage(systemName: "play.fill"), for: .normal)
             }else{
                 player.play()
-//                btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
+                btnPlay.setImage(UIImage(systemName: "stop.fill"), for: .normal)
             }
         }
     }
