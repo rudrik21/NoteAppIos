@@ -321,9 +321,10 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bg5-ff-93H">
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" indicatorStyle="black" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Bg5-ff-93H">
                                         <rect key="frame" x="0.0" y="311.5" width="375" height="311.5"/>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <color key="backgroundColor" red="0.12771538599999999" green="0.16868775550000001" blue="0.21907907269999999" alpha="0.92542363559999996" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OUn-hc-8bn">
                                             <size key="itemSize" width="50" height="50"/>
                                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -356,7 +357,7 @@
                             <barButtonItem image="camera.fill" catalog="system" id="jfD-dS-qcI">
                                 <color key="tintColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <connections>
-                                    <action selector="takeImage:" destination="Tza-dt-i3O" id="YPf-rl-aLJ"/>
+                                    <action selector="chooseImageFromPicker:" destination="Tza-dt-i3O" id="YPf-rl-aLJ"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem title="Item" image="mappin.and.ellipse" catalog="system" id="KKM-LT-D0h">
@@ -387,16 +388,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="RNC-5C-CW6">
-                                <rect key="frame" x="0.0" y="54" width="375" height="554"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RNC-5C-CW6">
+                                <rect key="frame" x="0.0" y="44" width="375" height="623"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="RNC-5C-CW6" firstAttribute="top" secondItem="e2t-9t-3Ip" secondAttribute="top" constant="10" id="BkP-fo-bHd"/>
-                            <constraint firstItem="RNC-5C-CW6" firstAttribute="leading" secondItem="e2t-9t-3Ip" secondAttribute="leading" id="d9I-Gs-nJU"/>
-                            <constraint firstItem="e2t-9t-3Ip" firstAttribute="trailing" secondItem="RNC-5C-CW6" secondAttribute="trailing" id="ouN-i2-Skc"/>
-                            <constraint firstItem="e2t-9t-3Ip" firstAttribute="bottom" secondItem="RNC-5C-CW6" secondAttribute="bottom" constant="10" id="ovJ-tW-WMH"/>
+                            <constraint firstItem="RNC-5C-CW6" firstAttribute="top" secondItem="e2t-9t-3Ip" secondAttribute="top" id="DDj-wP-0sb"/>
+                            <constraint firstItem="e2t-9t-3Ip" firstAttribute="bottom" secondItem="RNC-5C-CW6" secondAttribute="bottom" constant="-49" id="HbJ-zq-bYc"/>
+                            <constraint firstItem="RNC-5C-CW6" firstAttribute="trailing" secondItem="e2t-9t-3Ip" secondAttribute="trailing" id="S1G-xS-SOb"/>
+                            <constraint firstItem="RNC-5C-CW6" firstAttribute="leading" secondItem="e2t-9t-3Ip" secondAttribute="leading" id="lAF-pr-kxQ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="e2t-9t-3Ip"/>
                     </view>
@@ -407,7 +408,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dyg-8y-Ftx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2242" y="76"/>
+            <point key="canvasLocation" x="2240.8000000000002" y="75.112443778110944"/>
         </scene>
     </scenes>
     <resources>

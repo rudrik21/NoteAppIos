@@ -31,7 +31,9 @@ extension Folder{
 //            n.index == note.index
 //            }.first?.index
 //        self.notes[i!] = note
-        self.notes.remove(at: notes.firstIndex(of: oldNote)!)
+        if let on : Note = oldNote {
+            self.notes.remove(at: notes.firstIndex(of: on)!)
+        }
         self.notes.append(newNote)
         updateCurrent()
     }

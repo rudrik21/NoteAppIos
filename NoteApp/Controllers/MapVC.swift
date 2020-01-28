@@ -16,26 +16,18 @@ class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var locatioManager = CLLocationManager()
     var address = ""
-    var delegate : TakeNoteVC?
+    var takeNoteVC : TakeNoteVC?
     var annotation = MKPointAnnotation()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-                locatioManager.delegate = self
-                mapView.delegate = self
-                locatioManager.desiredAccuracy = kCLLocationAccuracyBest
-                locatioManager.requestWhenInUseAuthorization()
-                locatioManager.startUpdatingLocation()
-        
-                var desti = CLLocationCoordinate2D(latitude: delegate?.currentNote?.lat ?? 0.0, longitude: delegate?.currentNote?.long ?? 0.0)
-        
-            annotation.title = address
-            annotation.coordinate = desti
-            mapView.addAnnotation(annotation)
-        
-        showDirection(destination: desti, type: .automobile)
-      
+        locatioManager.delegate = self
+        mapView.delegate = self
+        locatioManager.desiredAccuracy = kCLLocationAccuracyBest
+        locatioManager.requestWhenInUseAuthorization()
+        locatioManager.startUpdatingLocation()
+            
         }
  
         func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -57,16 +49,32 @@ class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
             
             print(userLoaction)
 
+
+            if let takeNoteVC = takeNoteVC {
                 
+                let desti = CLLocation(coordinate: CLLocationCoordinate2D(latitude: takeNoteVC.newNote!.lat, longitude: takeNoteVC.newNote!.long), altitude: 0, horizontalAccuracy: 0, verticalAccuracy: 0, timestamp: Date())
+                
+                CLGeocoder().reverseGeocodeLocation(desti) { (placemarks, err) in
+                    if !placemarks!.isEmpty{
+                        self.navigationItem.title = "\(String(placemarks?.first?.subThoroughfare ?? "   ")), \(String(placemarks?.first?.thoroughfare ?? ""))"
+                    }
+                }
+
+                annotation.title = address
+                annotation.coordinate = desti.coordinate
+                mapView.addAnnotation(annotation)
+
+                showDirection(source: userLoaction.coordinate, destination: desti.coordinate, type: .automobile)
             }
+        }
         
-        func showDirection(destination : CLLocationCoordinate2D,type :MKDirectionsTransportType){
+        func showDirection(source : CLLocationCoordinate2D, destination : CLLocationCoordinate2D,type :MKDirectionsTransportType){
             
+            mapView.removeOverlays(mapView.overlays)
        
             if destination != nil{
-                let souceCordinate = mapView.annotations.first!.coordinate
                  
-                 let soucePlaceMark = MKPlacemark(coordinate: souceCordinate)
+                 let soucePlaceMark = MKPlacemark(coordinate: source)
                  let destPlaceMark = MKPlacemark(coordinate: destination)
                  
                  let sourceItem = MKMapItem(placemark: soucePlaceMark)
@@ -81,17 +89,16 @@ class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
                  let directions = MKDirections(request: destinationRequest)
                  directions.calculate { (response, error) in
                      guard let response = response else {
-                         if let error = error {
+                        if error != nil {
                              print("Something is wrong :(")
                          }
                          return
                      }
                      
-                   let route = response.routes[0]
+                    let route = response.routes[0]
                     print(route)
                     self.mapView.addOverlay(route.polyline)
-                    print("hi")
-                //  self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                    self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
                      
                  }
             }else{
@@ -99,59 +106,16 @@ class MapVC: UIViewController,CLLocationManagerDelegate, MKMapViewDelegate {
             }
             
         }
-            
-        
-        @objc func onTap(gestureRecognizer : UIGestureRecognizer){
-            
-          
-            if gestureRecognizer.state == .ended{
-              
-                     let destination_loaction = gestureRecognizer.location(in: mapView)
-                       coordinate = mapView.convert(destination_loaction, toCoordinateFrom: mapView)
-                          let annotation = MKPointAnnotation()
-                
-            mapView.removeAnnotations(mapView.annotations)
-            mapView.removeOverlays(mapView.overlays)
-                CLGeocoder().reverseGeocodeLocation(CLLocation(coordinate: coordinate, altitude: 0, horizontalAccuracy: 0, verticalAccuracy: 0, course: 0, speed: 0, timestamp: Date())) { (placemark, error) in
-                               
-                               if let error = error{
-                                   print(error)
-                               }else{
-                                   
-                                   if let placemark = placemark?[0]{
-                                      
-                                       self.address = ""
-                                       if placemark.name != nil{
-                                           self.address = placemark.name!
-                                       }
-                                   }
-                               }
-                           }
-
-                             annotation.title = address
-                             annotation.coordinate = coordinate
-                                
-                             mapView.addAnnotation(annotation)
-           
-            
-        }
-        }
         
         func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
          
             if overlay is  MKPolyline{
              
             let render = MKPolylineRenderer(overlay: overlay)
-            render.strokeColor = .darkGray
-            render.lineWidth = 4.0
-            return render
-        }
-            return MKOverlayRenderer()
-        
+                render.strokeColor = .darkGray
+                render.lineWidth = 4.0
+                return render
             }
-
-            
-    
-
-
+            return MKOverlayRenderer()
+        }
 }
