@@ -37,8 +37,15 @@ var shouldEdit = false
         
         btnMoveNote.isEnabled = false
         btnDeleteNote.isEnabled = false
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(releaseFocus))
+        navigationController?.navigationBar.addGestureRecognizer(tap)
     }
 
+    @objc func releaseFocus() {
+            resignFirstResponder()
+    }
+    
     func updateTable() {
         tvNotes.reloadData()
         resetAccessoryType()
@@ -81,6 +88,7 @@ var shouldEdit = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        delegate?.filteredFolders = Folder.folders
         delegate?.updateTable()
     }
     
@@ -111,7 +119,7 @@ var shouldEdit = false
                         deletingNotes.append((self.currentFolder?.notes[i!])!)
                     }
                 })
-                self.currentFolder?.removeNote(notes: deletingNotes)
+                self.currentFolder?.removeNote(rNotes: deletingNotes)
                 self.updateTable()
             }))
         

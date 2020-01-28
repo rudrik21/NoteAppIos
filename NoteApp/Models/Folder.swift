@@ -41,16 +41,21 @@ extension Folder{
     mutating func moveNote(notes: [Note], toFolder: Folder) {
         
         for n in notes{
-            self.removeNote(notes: [n])
+            self.removeNote(rNotes: [n])
             Folder.folders[toFolder.index].notes.append(n)
         }
         
         Folder.folders[self.index] = self
     }
     
-    mutating func removeNote(notes: [Note]) {
-        self.notes.forEach { (n) in
-            self.notes.remove(at: self.notes.firstIndex(of: n)!)
+    mutating func removeNote(rNotes: [Note]) {
+        for (i, n) in self.notes.enumerated() {
+            rNotes.forEach { (rn) in
+                if n.noteName == rn.noteName && n.lat == rn.lat && n.long == rn.long && n.strFiles.count == rn.strFiles.count{
+                    print(n)
+                    self.notes.remove(at: i)
+                }
+            }
         }
         updateCurrent()
     }

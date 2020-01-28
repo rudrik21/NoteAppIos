@@ -20,13 +20,8 @@ class FoldersVC: UIViewController, UISearchResultsUpdating {
         override func viewDidLoad() {
             super.viewDidLoad()
             start()
-            let tap = UITapGestureRecognizer(target: self, action: #selector(releaseFocus))
-                    navigationController?.navigationBar.addGestureRecognizer(tap)
+
         }
-    
-    @objc func releaseFocus() {
-        resignFirstResponder()
-        }
         
         //  MARK: INITIALIZATION
         func start() {
@@ -43,7 +38,14 @@ class FoldersVC: UIViewController, UISearchResultsUpdating {
             
             search?.searchBar.text = ""
             filteredFolders = Folder.folders
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(releaseFocus))
+            navigationController?.navigationBar.addGestureRecognizer(tap)
         }
+    
+        @objc func releaseFocus() {
+            resignFirstResponder()
+        }
     
         func updateSearchResults(for searchController: UISearchController) {
                guard let text = searchController.searchBar.text else { return }
