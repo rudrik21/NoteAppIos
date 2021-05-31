@@ -26,7 +26,7 @@ extension Folder{
         updateCurrent()
     }
     
-    mutating func updateNote(newNote: Note, oldNote: Note) {
+    mutating func updateNote(newNote: Note, oldNote: Note?) {
 //        let i = self.notes.filter { (n) -> Bool in
 //            n.index == note.index
 //            }.first?.index
